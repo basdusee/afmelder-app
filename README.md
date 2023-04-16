@@ -14,13 +14,32 @@ Data transfer is with advanced(tm) JSON formatting technology.
 The back-end can be used standalone to integrate in other applications, it's not tied to the frontend.
 
 ## How to make it work?
-This is a hacked-up mess and there isn't a nice installer. To make this work, do:
-* find/have/arrange/steal a VPS, I used one with a Debian Bullseye image on it.
-* Install a load balancer (I used nginx) or use one from a Cloud something.
-* Compile the back-end (basically `cargo build --release`) and copy the afmelder-app from target/ over to VPS
-* Install afmelder.service in systemd of VPS and start back-end service
-* "Compile" frontend with `hugo`, just like the Hugo RTFM says.
-* Copy over the site found in public/ to /var/www/afmelder-app on the VPS, probably with scp
+Compile the digital bits and bytes in this repo and run the mess comming out of it in a Virtual Private Server (VPS).
+You can enjoy all the juicy goodness of this app afterwards.
+You can also run this whole hot mess on your local machine. 
+Leave out the load balancer and use "localhost" as your server.
+
+This is a manual hacked-up mess and there isn't a nice installer. To make this work, try:
+* Find/have/arrange/borrow/steal a VPS, I used one with a Debian Bullseye image on it.
+* Do all the SSH key, updates, firwall etc. stuff you do with a basic VPS.
+* Install a webserver/load balancer (I use nginx) or use one from a Cloud something.
+* git clone this repo (duh..) on your machine (laptop or desktop)
+* Start a container on your machine with the `debian-podman.sh` script, or do it manually inspired by the script
+    * In te container: go to the /opt/afmelder-app directory
+    * Do all the Rust stuff, so maybe `cargo check` and definately `cargo build --release`
+    * exit and nuke the container
+* Copy (scp or rsync) the afmelder.service file in the repo to the VPS under `/etc/systemd/system/afmelder.service`
+* Copy (scp or rsync) the `afmelder-app` binary from the repo `backend/target/release` directory to your VPS as /opt/afmelder-app
+* Log into the VPS with SSH and do:
+    * create `afmelder` user with something like `useradd -s /usr/bin/nologin -r -M afmelder`
+    * Make afmelder-app executable on the VPS with something like `chmod +x /opt/afmelder-app` 
+    * Start the afmelder service with `systemd start afmelder.service`
+    * Check with `systemd status afmelder.service`
+    * If there are errors (red text), _don't_ bother me with that. Find someone with a neckbeard to help you
+    * exit SSH
+* Install Hugo on your local machine using the Hugo RTFM: https://gohugo.io/installation/
+* "Compile" frontend with the command `hugo` inside the repo `frontend/` directory, just like the Hugo RTFM says.
+* Copy over the site found in `frontend/public/` in the `/var/www/afmelder-app/` directory on the VPS, probably with scp or rsync
 * Ready! enjoy the site.
 
 This is in no-way a comprehensive install guide, you probably need to understand Rust (well, Cargo at least) and Hugo to fix everything I didnt tell you.

@@ -4,7 +4,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=actix-afmelder
+User=afmelder
 ExecStart=/opt/afmelder-app
 
 [Install]
