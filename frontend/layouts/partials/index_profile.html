@@ -1,0 +1,19 @@
+<div class="profile">
+    {{- with .Site.Params.profileMode }}
+    <div class="profile_inner">
+        {{- if .imageUrl -}}
+        <img src="{{ .imageUrl | absURL }}" alt="{{ .imageTitle | default " profile image" }}"
+            height="{{ .imageHeight | default 200 }}" width="{{ .imageWidth | default 200 }}" />
+        {{- end }}
+        <h3>{{ .instructions | default $.Site.Title | markdownify }}</h3>
+        <div class="buttons">
+            <a class="button" title="{{ .name | title }}">
+		    <span class="button-inner"><input type="button" class="button" value="Knop" onclick="changetxt()" /></span>
+            </a>
+        </div>
+
+	<div class="profile-description"><p id="afmelding">{{ .afmeldertekst }}</p></div>
+
+    </div>
+    {{- end}}
+</div>

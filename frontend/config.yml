@@ -1,0 +1,45 @@
+baseURL: https://<<servername>>
+title: Advanced (tm) Cyber Afmelder App
+paginate: 5
+
+params:
+    author: Bas
+
+    defaultTheme: auto
+    # disableThemeToggle: true
+    ShowShareButtons: false
+    ShowReadingTime: false
+    displayFullLangName: false
+    ShowBreadCrumbs: false
+    ShowCodeCopyButtons: true
+    ShowToc: false
+
+    profileMode:
+        # Disable to populate home page with 'mainSections' content
+        enabled: true
+        instructions: Copy (Ctrl-C) de tekst onder de knop en paste (Ctrl-V) in Teams.
+        afmeldertekst: |
+          >> ERROR << No connection to database back-end.
+           Push the Knop to reconnect >> ERROR <<
+        imageUrl: "/images/profile.png"
+        imageTitle: Cyber, ja toch
+        # imageWidth: 120
+        # imageHeight: 120
+
+    # change favicon in images folder (icon for web tab)
+    assets:
+          favicon: "/images/favicon.ico"
+          favicon16x16: "/images/favicon-16x16.png"
+          favicon32x32: "/images/favicon-32x32.png"
+          apple_touch_icon: "/images/apple-touch-icon.png"
+          safari_pinned_tab: "/images/apple-touch-icon.png"
+
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+enableEmoji: true
+pygmentsUseClasses: false
+
+minify:
+    disableXML: true
+
